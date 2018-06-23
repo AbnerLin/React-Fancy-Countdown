@@ -1,0 +1,27 @@
+{
+  "name": "react-fancy-countdown",
+  "version": "1.0.0",
+  "description": "A fancy countdown component for React.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbnerLin/React-Fancy-Countdown.git"
+  },
+  "keywords": [
+    "countdown",
+    "react",
+    "react-countdown",
+    "fancy-countdown",
+    "react-fancy-countdown",
+    "count"
+  ],
+  "author": "AbnerLin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AbnerLin/React-Fancy-Countdown/issues"
+  },
+  "homepage": "https://github.com/AbnerLin/React-Fancy-Countdown#readme"
+}
