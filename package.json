@@ -25,7 +25,11 @@
     "url": "https://github.com/AbnerLin/React-Fancy-Countdown/issues"
   },
   "homepage": "https://github.com/AbnerLin/React-Fancy-Countdown#readme",
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.22.2",
+    "moment-duration-format": "^2.2.2",
+    "twix": "^1.2.1"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
