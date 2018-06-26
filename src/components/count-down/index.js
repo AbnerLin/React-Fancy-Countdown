@@ -11,29 +11,39 @@ class Countdown extends React.Component {
       deadline: DateTimeUtil.isValid(this.props.deadline)
     };
 
-
-    // let now = moment();
-    // let secondsInterval = DateTimeUtil.getInterval(now, this.state.deadline);
-
-    // console.log(secondsInterval);
-    // console.log(moment.duration(secondsInterval, "seconds").format("Y[year(s)] M[months] D[days] H:m:s")); // set interval format.
-
     this.start = this.start.bind(this);
+    this.update = this.update.bind(this);
+    this.stop = this.stop.bind(this);
     this.start();
+    this.update();
   }
 
   start() {
-    setInterval(() => {
-      let secondsInterval = this.state.deadline ? DateTimeUtil.getInterval(DateTimeUtil.now(), this.state.deadline) : undefined;
-      this.props.updateTime(secondsInterval);
+    this.timer = setInterval(() => {
+      this.update();
     }, this.props.interval || 1000);
+  }
+
+  update() {
+    let secondsInterval = this.state.deadline ? DateTimeUtil.getInterval(DateTimeUtil.now(), this.state.deadline) : undefined;
+
+    if(secondsInterval <= 0) {
+      this.stop();
+      this.props.callback();
+    } else {
+      this.props.updateTime(secondsInterval);
+    }
+  }
+
+  stop() {
+    clearInterval(this.timer);
   }
 
 	render() {
 		return (
       <div>
         { this.props.children }
-        <br />=======<br />
+        =======<br />
         { this.state.deadline.format() }
       </div>
     );
@@ -44,6 +54,7 @@ class Countdown extends React.Component {
 Countdown.propTypes = {
 	deadline: PropTypes.string.isRequired,
   updateTime: PropTypes.func.isRequired,
+  callback: PropTypes.func.isRequired,
   interval: PropTypes.number
 };
 

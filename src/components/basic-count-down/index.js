@@ -4,7 +4,7 @@ import DateTimeUtil from '../../datetime-util';
 
 const basicCountDown = (WrappedComponent) => {
 
-  return class extends React.Component {
+  class BasicCountDown extends React.Component {
 
     /**
 
@@ -17,11 +17,11 @@ const basicCountDown = (WrappedComponent) => {
     minutes: m
     seconds: s
     ms: S
+    Escape token characters within the template string using square brackets.
     ================
 
     TODO:
-      1. CSS
-      2. numbers replace.
+      1. numbers replace.
 
     */
 
@@ -29,16 +29,15 @@ const basicCountDown = (WrappedComponent) => {
       super(props);
 
       this.state = {
-        time: DateTimeUtil.format(
-              DateTimeUtil.getInterval(DateTimeUtil.now(), DateTimeUtil.toDate(this.props.deadline)),
-              this.props.format)
+        time: "",
+        due: false
       };
 
       this.updateTime = this.updateTime.bind(this);
+      this._callback = this._callback.bind(this);
     }
 
     updateTime(seconds) {
-
       if(seconds) {
         if (this.props.format) {
           seconds = DateTimeUtil.format(seconds, this.props.format);
@@ -51,26 +50,43 @@ const basicCountDown = (WrappedComponent) => {
       } else {
         console.log('error'); // TODO
       }
+    }
 
+    _callback() {
+      this.props.callback();
+      this.setState({
+        due: true
+      });
     }
 
     render() {
       return (
         <WrappedComponent
+          { ...this.props }
           updateTime={ this.updateTime }
-          { ...this.props }>
+          callback={ this._callback }>
           <div>
-            { this.state.time }
+            { !this.state.due ? this.state.time : this.props.dueElement }
           </div>
         </WrappedComponent>
       );
     }
 
-  };
-}
+  }
 
-basicCountDown.propTypes = {
-  format: PropTypes.string
-};
+  BasicCountDown.propTypes = {
+    format: PropTypes.string,
+    dueElement: PropTypes.element
+  };
+
+  BasicCountDown.defaultProps = {
+    dueElement: (<div> Time is up. </div>),
+    callback: () => {
+      console.log('Time is up.');
+    }
+  };
+
+  return BasicCountDown;
+}
 
 export default basicCountDown;
