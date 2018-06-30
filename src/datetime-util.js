@@ -4,9 +4,17 @@ import 'moment-duration-format';
 
 class DateTimeUtil {
 
+  static getSecondsDef() {
+    return {
+      DAY: 60 * 60 * 24,
+      HOUR: 60 * 60,
+      MINUTE: 60
+    };
+  }
+
   static isValid(dateTime) {
     let m = moment(dateTime);
-    return m.isValid() ? m : undefined;
+    return m.isValid() ? m : false;
   }
 
   static now() {

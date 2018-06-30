@@ -8,7 +8,8 @@ class Countdown extends React.Component {
     super(props);
 
     this.state = {
-      deadline: DateTimeUtil.isValid(this.props.deadline)
+      deadline: DateTimeUtil.isValid(this.props.deadline),
+      due: false
     };
 
     this.start = this.start.bind(this);
@@ -27,24 +28,28 @@ class Countdown extends React.Component {
   update() {
     let secondsInterval = this.state.deadline ? DateTimeUtil.getInterval(DateTimeUtil.now(), this.state.deadline) : undefined;
 
-    if(secondsInterval <= 0) {
+    if (secondsInterval <= 0) {
       this.stop();
-      this.props.callback();
     } else {
       this.props.updateTime(secondsInterval);
     }
   }
 
   stop() {
-    clearInterval(this.timer);
+    setImmediate(() => {
+      this.setState({
+        due: true
+      }, () => {
+        this.props.callback();
+        clearInterval(this.timer);
+      });
+    });
   }
 
 	render() {
 		return (
       <div>
-        { this.props.children }
-        =======<br />
-        { this.state.deadline.format() }
+        { this.state.due ? this.props.dueElement : this.props.children }
       </div>
     );
 	}
@@ -55,7 +60,15 @@ Countdown.propTypes = {
 	deadline: PropTypes.string.isRequired,
   updateTime: PropTypes.func.isRequired,
   callback: PropTypes.func.isRequired,
-  interval: PropTypes.number
+  interval: PropTypes.number,
+  dueElement: PropTypes.element
+};
+
+Countdown.defaultProps = {
+  dueElement: (<div> Time is up. </div>),
+  callback: () => {
+    console.log('Time is up.');
+  }
 };
 
 export default Countdown;

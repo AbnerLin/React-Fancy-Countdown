@@ -7,7 +7,6 @@ const basicCountDown = (WrappedComponent) => {
   class BasicCountDown extends React.Component {
 
     /**
-
     =====Format=====
     years: Y or y
     months: M
@@ -19,10 +18,6 @@ const basicCountDown = (WrappedComponent) => {
     ms: S
     Escape token characters within the template string using square brackets.
     ================
-
-    TODO:
-      1. numbers replace.
-
     */
 
     constructor(props) {
@@ -34,28 +29,19 @@ const basicCountDown = (WrappedComponent) => {
       };
 
       this.updateTime = this.updateTime.bind(this);
-      this._callback = this._callback.bind(this);
     }
 
     updateTime(seconds) {
-      if(seconds) {
+      if (seconds) {
         if (this.props.format) {
           seconds = DateTimeUtil.format(seconds, this.props.format);
         }
-
-        this.setState({
-          time: seconds
-        });
-
       } else {
-        console.log('error'); // TODO
+        seconds = 'Invalid date!';
       }
-    }
 
-    _callback() {
-      this.props.callback();
       this.setState({
-        due: true
+        time: seconds
       });
     }
 
@@ -63,8 +49,7 @@ const basicCountDown = (WrappedComponent) => {
       return (
         <WrappedComponent
           { ...this.props }
-          updateTime={ this.updateTime }
-          callback={ this._callback }>
+          updateTime={ this.updateTime }>
           <div>
             { !this.state.due ? this.state.time : this.props.dueElement }
           </div>
@@ -75,15 +60,7 @@ const basicCountDown = (WrappedComponent) => {
   }
 
   BasicCountDown.propTypes = {
-    format: PropTypes.string,
-    dueElement: PropTypes.element
-  };
-
-  BasicCountDown.defaultProps = {
-    dueElement: (<div> Time is up. </div>),
-    callback: () => {
-      console.log('Time is up.');
-    }
+    format: PropTypes.string
   };
 
   return BasicCountDown;
