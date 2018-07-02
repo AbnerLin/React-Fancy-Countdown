@@ -15,8 +15,11 @@ class Countdown extends React.Component {
     this.start = this.start.bind(this);
     this.update = this.update.bind(this);
     this.stop = this.stop.bind(this);
-    this.start();
+  }
+
+  componentDidMount() {
     this.update();
+    this.start();
   }
 
   start() {
@@ -36,13 +39,11 @@ class Countdown extends React.Component {
   }
 
   stop() {
-    setImmediate(() => {
-      this.setState({
-        due: true
-      }, () => {
-        this.props.callback();
-        clearInterval(this.timer);
-      });
+    this.setState({
+      due: true
+    }, () => {
+      this.props.callback();
+      clearInterval(this.timer);
     });
   }
 
