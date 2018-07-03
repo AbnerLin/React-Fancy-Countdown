@@ -38,25 +38,38 @@ const flipCountDown = (WrappedComponent) => {
 
     updateTime(flatSeconds) {
 
-      // console.log(DateTimeUtil.getSecondsDef());
-      // console.log(parseInt(seconds / DateTimeUtil.getSecondsDef().DAY));
-      // console.log(parseInt(seconds % DateTimeUtil.getSecondsDef().DAY / DateTimeUtil.getSecondsDef().HOUR));
-      // console.log(parseInt(seconds % DateTimeUtil.getSecondsDef().HOUR / DateTimeUtil.getSecondsDef().MINUTE));
-      // console.log(parseInt(seconds % DateTimeUtil.getSecondsDef().MINUTE));
-      console.log(DateTimeUtil.format(flatSeconds, 'd hh mm ss'));
+      console.log(DateTimeUtil.format(flatSeconds, 'WW dd hh mm ss'));
+
+      let checkTime = (wrap, val) => {
+        let tensDom = wrap.querySelector('.tens');
+        let unitsDom = wrap.querySelector('.units');
+
+        let tens = parseInt(val / 10);
+        let units = val % 10;
+
+        if (tens != tensDom.querySelector('.top').innerHTML) this.flip(tensDom, tens);
+        if (units != unitsDom.querySelector('.top').innerHTML) this.flip(unitsDom, units);
+      }
 
       /** seconds */
       let seconds = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().MINUTE);
-      var seconds1 = document.querySelector('.seconds-1');
-      var seconds2 = document.querySelector('.seconds-2');
+      checkTime(document.querySelector('.seconds'), seconds);
 
-      // console.log(seconds);
-      // console.log(seconds1);
-      // console.log(seconds2);
+      /** minutes */
+      let minutes = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().HOUR / DateTimeUtil.getSecondsDef().MINUTE);
+      checkTime(document.querySelector('.minutes'), minutes);
 
-      if (seconds / 10 != seconds1.querySelector('.top').innerHTML) this.flip(seconds1, seconds / 10);
-      if (seconds % 10 != seconds2.querySelector('.top').innerHTML) this.flip(seconds2, seconds % 10);
+      /** hours */
+      let hours = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().DAY / DateTimeUtil.getSecondsDef().HOUR);
+      checkTime(document.querySelector('.hours'), hours);
 
+      /** days */
+      let days = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().WEEK / DateTimeUtil.getSecondsDef().DAY);
+      checkTime(document.querySelector('.days'), days);
+
+      /**  weeks */
+      let weeks = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().WEEK);
+      checkTime(document.querySelector('.weeks'), weeks);
 
       this.setState({
         time: flatSeconds
@@ -64,10 +77,22 @@ const flipCountDown = (WrappedComponent) => {
     }
 
     flip(element, value) {
-      console.log(element.querySelector('.top').innerHTML);
+      let top = element.querySelector('.top');
+      let topBack = element.querySelector('.top-back');
+      let bottom = element.querySelector('.bottom');
+      let bottomBack = element.querySelector('.bottom-back');
 
+      topBack.innerHTML = value;
+      bottom.innerHTML = value;
 
-
+      Effect.rotateX(top, 0, 90, 100, () => {
+        Effect.rotateX(bottom, -90, 0, 100, () => {
+          top.innerHTML = value;
+          bottomBack.innerHTML = value;
+          Effect.setRotateX(top, 0);
+          Effect.setRotateX(bottom, -90);
+        });
+      });
     }
 
     render() {
@@ -80,67 +105,83 @@ const flipCountDown = (WrappedComponent) => {
             { !this.state.due ? this.state.time : this.props.dueElement }
             <div className="countdown">
 
-              <div className="block-time">
+              <div className="block-time weeks">
+                <span className="title">WEEKS</span>
+                <div className="stage tens">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
+                </div>
+                <div className="stage units">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
+                </div>
+              </div>
+
+              <div className="block-time days">
                 <span className="title">DAYS</span>
-                <div className="stage days days-1">
-                  <span className="top">5</span>
-                  <span className="top-back">4</span>
-                  <span className="bottom">4</span>
-                  <span className="bottom-back">5</span>
+                <div className="stage tens">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
                 </div>
-                <div className="stage days days-2">
-                  <span className="top">2</span>
-                  <span className="top-back">1</span>
-                  <span className="bottom">1</span>
-                  <span className="bottom-bck">2</span>
+                <div className="stage units">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
                 </div>
               </div>
 
-              <div className="block-time">
+              <div className="block-time hours">
                 <span className="title">HOURS</span>
-                <div className="stage hours hours-1">
-                  <span className="top">4</span>
-                  <span className="top-back">3</span>
-                  <span className="bottom">3</span>
-                  <span className="bottom-back">4</span>
+                <div className="stage tens">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
                 </div>
-                <div className="stage hours hours-2">
-                  <span className="top">4</span>
-                  <span className="top-back">3</span>
-                  <span className="bottom">3</span>
-                  <span className="bottom-bck">4</span>
+                <div className="stage units">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
                 </div>
               </div>
 
-              <div className="block-time">
+              <div className="block-time minutes">
                 <span className="title">MINUTES</span>
-                <div className="stage minutes minutes-1">
-                  <span className="top">3</span>
-                  <span className="top-back">2</span>
-                  <span className="bottom">2</span>
-                  <span className="bottom-back">3</span>
+                <div className="stage tens">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
                 </div>
-                <div className="stage minutes minutes-2">
-                  <span className="top">3</span>
-                  <span className="top-back">2</span>
-                  <span className="bottom">2</span>
-                  <span className="bottom-bck">3</span>
+                <div className="stage units">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
                 </div>
               </div>
 
-              <div className="block-time">
+              <div className="block-time seconds">
                 <span className="title">SECONDS</span>
-                <div className="stage seconds seconds-1">
-                  <span className="top">5</span>
-                  <span className="top-back">4</span>
-                  <span className="bottom">4</span>
-                  <span className="bottom-back">5</span>
+                <div className="stage tens">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
                 </div>
-                <div className="stage seconds seconds-2">
-                  <span className="top">6</span>
-                  <span className="top-back">5</span>
-                  <span className="bottom">5</span>
-                  <span className="bottom-bck">6</span>
+                <div className="stage units">
+                  <span className="top">7</span>
+                  <span className="top-back">7</span>
+                  <span className="bottom">7</span>
+                  <span className="bottom-back">7</span>
                 </div>
               </div>
 

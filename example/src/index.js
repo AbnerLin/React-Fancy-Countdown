@@ -39,7 +39,7 @@ const App = () => (
     <div>
 
       <FlipCountdown
-        deadline="2019-07-30 01:56:11"
+        deadline="2018-09-11 14:48:00"
         interval={1000} />
 
     </div>

@@ -9,6 +9,10 @@ class Effect {
     element.style.webkitTransform = 'rotateX(0)';
   }
 
+  static setRotateX(element, deg) {
+    element.style.webkitTransform = 'rotateX(' + deg + 'deg)';
+  }
+
   static rotateX(element, from, to, period, callback) {
     var oriDeg = from;
 
@@ -25,7 +29,7 @@ class Effect {
         if(oriDeg > to)
           oriDeg = to;
 
-        element.style.webkitTransform = 'rotateX(' + oriDeg + 'deg)';
+        Effect.setRotateX(element, oriDeg);
       }
     }
   }

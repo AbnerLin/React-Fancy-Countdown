@@ -6,6 +6,7 @@ class DateTimeUtil {
 
   static getSecondsDef() {
     return {
+      WEEK: 60 * 60 * 24 * 7,
       DAY: 60 * 60 * 24,
       HOUR: 60 * 60,
       MINUTE: 60
