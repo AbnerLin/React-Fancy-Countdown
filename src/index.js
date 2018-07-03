@@ -1,6 +1,6 @@
-import Countdown from './components/count-down';
-import Basic from './components/basic-count-down';
-import Flip from './components/flip-count-down';
+import Countdown from './components/countdown';
+import Basic from './components/basic-countdown';
+import Flip from './components/flip-countdown';
 
 const BasicCountdown = Basic(Countdown);
 const FlipCountdown = Flip(Countdown);

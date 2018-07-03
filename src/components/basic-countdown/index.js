@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DateTimeUtil from '../../datetime-util';
 
-const basicCountDown = (WrappedComponent) => {
+const basicCountdown = (WrappedComponent) => {
 
-  class BasicCountDown extends React.Component {
+  class BasicCountdown extends React.Component {
 
     /**
       =====Format=====
@@ -59,11 +59,11 @@ const basicCountDown = (WrappedComponent) => {
 
   }
 
-  BasicCountDown.propTypes = {
+  BasicCountdown.propTypes = {
     format: PropTypes.string
   };
 
-  return BasicCountDown;
+  return BasicCountdown;
 }
 
-export default basicCountDown;
+export default basicCountdown;

@@ -6,9 +6,9 @@ import Effect from '../../effect';
 
 import './index.scss';
 
-const flipCountDown = (WrappedComponent) => {
+const flipCountdown = (WrappedComponent) => {
 
-  class FlipCountDown extends React.Component {
+  class FlipCountdown extends React.Component {
 
     /**
       =====Props=====
@@ -98,7 +98,7 @@ const flipCountDown = (WrappedComponent) => {
           ref={ selfRef => {
             this.selfRef = selfRef;
           }}>
-          <div className="flipCountDown">
+          <div className="flipCountdown">
               { this.props.weeks ? (
                 <div className="block-time weeks">
                   <span className="title">WEEKS</span>
@@ -188,18 +188,16 @@ const flipCountDown = (WrappedComponent) => {
 
   }
 
-  FlipCountDown.propTypes = {
-    dueElement: PropTypes.element,
-    callback: PropTypes.func,
+  FlipCountdown.propTypes = {
     weeks: PropTypes.bool
   };
 
-  FlipCountDown.defaultProps = {
+  FlipCountdown.defaultProps = {
     weeks: true
   };
 
-  return FlipCountDown;
+  return FlipCountdown;
 }
 
-export default flipCountDown;
+export default flipCountdown;
 

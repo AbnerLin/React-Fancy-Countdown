@@ -6,8 +6,8 @@ class Countdown extends React.Component {
 
   /**
     =====Props=====
-    dueElement:
-    callback:
+    dueElement: The dom will replace original dom when the time is up.
+    callback: Method will invoked when the time is up.
     ================
   */
 
