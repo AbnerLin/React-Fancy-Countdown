@@ -18,22 +18,7 @@ const flipCountDown = (WrappedComponent) => {
       };
 
       this.updateTime = this.updateTime.bind(this);
-      // this._callback = this._callback.bind(this);
       this.flip = this.flip.bind(this);
-    }
-
-    componentDidMount() {
-      var dom = document.getElementsByClassName('top')[0];
-      Effect.rotateX(dom, 0, 90, 100, () => {
-        var bottomDom = document.getElementsByClassName('bottom')[0];
-        Effect.rotateX(bottomDom, -90, 0, 100, null);
-      });
-
-       var dom = document.getElementsByClassName('top')[1];
-       Effect.rotateX(dom, 0, 90, 100, () => {
-         var bottomDom = document.getElementsByClassName('bottom')[1];
-         Effect.rotateX(bottomDom, -90, 0, 100, null);
-       });
     }
 
     updateTime(flatSeconds) {
