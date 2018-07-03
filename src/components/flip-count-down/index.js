@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DateTimeUtil from '../../datetime-util';
 import Effect from '../../effect';
@@ -9,12 +10,17 @@ const flipCountDown = (WrappedComponent) => {
 
   class FlipCountDown extends React.Component {
 
+    /**
+      =====Props=====
+      Weeks: Set true if days are more than 99.
+      ================
+    */
+
     constructor(props) {
       super(props);
 
       this.state = {
-        due: false,
-        time: '' // !!?
+        due: false
       };
 
       this.updateTime = this.updateTime.bind(this);
@@ -36,29 +42,32 @@ const flipCountDown = (WrappedComponent) => {
         if (units != unitsDom.querySelector('.top').innerHTML) this.flip(unitsDom, units);
       }
 
+      let _thisDoc = ReactDOM.findDOMNode(this);
+
       /** seconds */
       let seconds = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().MINUTE);
-      checkTime(document.querySelector('.seconds'), seconds);
+      checkTime(_thisDoc.querySelector('.seconds'), seconds);
 
       /** minutes */
       let minutes = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().HOUR / DateTimeUtil.getSecondsDef().MINUTE);
-      checkTime(document.querySelector('.minutes'), minutes);
+      checkTime(_thisDoc.querySelector('.minutes'), minutes);
 
       /** hours */
       let hours = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().DAY / DateTimeUtil.getSecondsDef().HOUR);
-      checkTime(document.querySelector('.hours'), hours);
+      checkTime(_thisDoc.querySelector('.hours'), hours);
 
       /** days */
       let days = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().WEEK / DateTimeUtil.getSecondsDef().DAY);
-      checkTime(document.querySelector('.days'), days);
+      if (!this.props.weeks) {
+        days = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().DAY % 100);
+      }
+      checkTime(_thisDoc.querySelector('.days'), days);
 
       /**  weeks */
-      let weeks = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().WEEK);
-      checkTime(document.querySelector('.weeks'), weeks);
-
-      this.setState({
-        time: flatSeconds
-      });
+      if (this.props.weeks) {
+        let weeks = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().WEEK);
+        checkTime(_thisDoc.querySelector('.weeks'), weeks);
+      }
     }
 
     flip(element, value) {
@@ -85,26 +94,28 @@ const flipCountDown = (WrappedComponent) => {
         <WrappedComponent
           { ...this.props }
           updateTime={ this.updateTime }
-          _callback={this._callback}>
-          <div>
-            { !this.state.due ? this.state.time : this.props.dueElement }
-            <div className="countdown">
-
-              <div className="block-time weeks">
-                <span className="title">WEEKS</span>
-                <div className="stage tens">
-                  <span className="top">7</span>
-                  <span className="top-back">7</span>
-                  <span className="bottom">7</span>
-                  <span className="bottom-back">7</span>
+          _callback={this._callback}
+          ref={ selfRef => {
+            this.selfRef = selfRef;
+          }}>
+          <div className="flipCountDown">
+              { this.props.weeks ? (
+                <div className="block-time weeks">
+                  <span className="title">WEEKS</span>
+                  <div className="stage tens">
+                    <span className="top">7</span>
+                    <span className="top-back">7</span>
+                    <span className="bottom">7</span>
+                    <span className="bottom-back">7</span>
+                  </div>
+                  <div className="stage units">
+                    <span className="top">7</span>
+                    <span className="top-back">7</span>
+                    <span className="bottom">7</span>
+                    <span className="bottom-back">7</span>
+                  </div>
                 </div>
-                <div className="stage units">
-                  <span className="top">7</span>
-                  <span className="top-back">7</span>
-                  <span className="bottom">7</span>
-                  <span className="bottom-back">7</span>
-                </div>
-              </div>
+              ) : null }
 
               <div className="block-time days">
                 <span className="title">DAYS</span>
@@ -170,7 +181,6 @@ const flipCountDown = (WrappedComponent) => {
                 </div>
               </div>
 
-            </div>
           </div>
         </WrappedComponent>
       );
@@ -180,8 +190,13 @@ const flipCountDown = (WrappedComponent) => {
 
   FlipCountDown.propTypes = {
     dueElement: PropTypes.element,
-    callback: PropTypes.func
-  }
+    callback: PropTypes.func,
+    weeks: PropTypes.bool
+  };
+
+  FlipCountDown.defaultProps = {
+    weeks: true
+  };
 
   return FlipCountDown;
 }

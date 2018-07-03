@@ -1,6 +1,12 @@
+.flipCountDown {
+  display: inline-block;
+}
+
 .block-time {
   width: 230px;
   float: left;
+  margin: 15px;
+  /*border: 1px solid black;*/
 
   >.title {
     display: block;

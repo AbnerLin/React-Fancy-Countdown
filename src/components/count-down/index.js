@@ -4,6 +4,13 @@ import DateTimeUtil from '../../datetime-util';
 
 class Countdown extends React.Component {
 
+  /**
+    =====Props=====
+    dueElement:
+    callback:
+    ================
+  */
+
   constructor(props) {
     super(props);
 

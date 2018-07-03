@@ -7,17 +7,17 @@ const basicCountDown = (WrappedComponent) => {
   class BasicCountDown extends React.Component {
 
     /**
-    =====Format=====
-    years: Y or y
-    months: M
-    weeks: W or w
-    days: D or d
-    hours: H or h
-    minutes: m
-    seconds: s
-    ms: S
-    Escape token characters within the template string using square brackets.
-    ================
+      =====Format=====
+      years: Y or y
+      months: M
+      weeks: W or w
+      days: D or d
+      hours: H or h
+      minutes: m
+      seconds: s
+      ms: S
+      Escape token characters within the template string using square brackets.
+      ================
     */
 
     constructor(props) {
