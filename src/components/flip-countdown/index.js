@@ -29,8 +29,6 @@ const flipCountdown = (WrappedComponent) => {
 
     updateTime(flatSeconds) {
 
-      console.log(DateTimeUtil.format(flatSeconds, 'WW dd hh mm ss'));
-
       let checkTime = (wrap, val) => {
         let tensDom = wrap.querySelector('.tens');
         let unitsDom = wrap.querySelector('.units');
@@ -79,7 +77,7 @@ const flipCountdown = (WrappedComponent) => {
       topBack.innerHTML = value;
       bottom.innerHTML = value;
 
-      Effect.rotateX(top, 0, 90, 100, () => {
+      Effect.rotateX(top, 0, 90, 150, () => {
         Effect.rotateX(bottom, -90, 0, 100, () => {
           top.innerHTML = value;
           bottomBack.innerHTML = value;
@@ -93,11 +91,7 @@ const flipCountdown = (WrappedComponent) => {
       return (
         <WrappedComponent
           { ...this.props }
-          updateTime={ this.updateTime }
-          _callback={this._callback}
-          ref={ selfRef => {
-            this.selfRef = selfRef;
-          }}>
+          updateTime={ this.updateTime }>
           <div className="flipCountdown">
               { this.props.weeks ? (
                 <div className="block-time weeks">

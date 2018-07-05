@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { BasicCountdown, FlipCountdown } from '../../src'
+import { BasicCountdown,
+         FlipCountdown,
+         SlideCountdown
+       } from '../../src'
 
 
 const Due = () => ( <div className="due">Game over!</div> );
@@ -60,8 +63,23 @@ const App = () => (
           interval={1000} />
       </div>
 
-
+      <div className="text-center">
+        <FlipCountdown
+          deadline="2018-07-04 16:11:20"
+          interval={1000} />
+      </div>
     </div>
+
+    <hr />
+
+    <div>
+      <div className="text-center">
+        <SlideCountdown
+          deadline="2019-06-30 12:39:11"
+          interval={1000} />
+      </div>
+    </div>
+
   </div>
 
 
