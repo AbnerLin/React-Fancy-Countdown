@@ -50,7 +50,7 @@ const App = () => (
 
       <div className="text-center">
         <FlipCountdown
-          deadline="2018-07-08 15:31"
+          deadline="2018-07-07 22:38:20"
           interval={1000}
           weeks={false} />
       </div>
@@ -59,13 +59,15 @@ const App = () => (
 
       <div className="text-center">
         <FlipCountdown
-          deadline="2019-07-08 15:31:33"
+          deadline="2018-07-07 22:38:20"
           interval={1000} />
       </div>
 
       <div className="text-center">
         <FlipCountdown
-          deadline="2018-07-04 16:11:20"
+          deadline="2018-07-07 22:38:20"
+          days={false}
+          weeks={true}
           interval={1000} />
       </div>
     </div>

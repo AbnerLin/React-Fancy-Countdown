@@ -12,7 +12,8 @@ const flipCountdown = (WrappedComponent) => {
 
     /**
       =====Props=====
-      Weeks: Set true if days are more than 99.
+      Days: Set true if hours are more than 99; If false this component only support less than 100 hours and doesn't show Hours and Weeks.
+      Weeks: Set true if days are more than 99; If false this component only support less than 100 days and doesn't show Weeks.
       ================
     */
 
@@ -50,21 +51,27 @@ const flipCountdown = (WrappedComponent) => {
       let minutes = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().HOUR / DateTimeUtil.getSecondsDef().MINUTE);
       checkTime(_thisDoc.querySelector('.minutes'), minutes);
 
+
       /** hours */
       let hours = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().DAY / DateTimeUtil.getSecondsDef().HOUR);
+      if (!this.props.days) {
+        hours = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().HOUR % 100);
+      }
       checkTime(_thisDoc.querySelector('.hours'), hours);
 
       /** days */
-      let days = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().WEEK / DateTimeUtil.getSecondsDef().DAY);
-      if (!this.props.weeks) {
-        days = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().DAY % 100);
-      }
-      checkTime(_thisDoc.querySelector('.days'), days);
+      if (this.props.days) {
+        let days = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().WEEK / DateTimeUtil.getSecondsDef().DAY);
+        if (!this.props.weeks) {
+          days = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().DAY % 100);
+        }
+        checkTime(_thisDoc.querySelector('.days'), days);
 
-      /**  weeks */
-      if (this.props.weeks) {
-        let weeks = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().WEEK);
-        checkTime(_thisDoc.querySelector('.weeks'), weeks);
+        /**  weeks */
+        if (this.props.weeks) {
+          let weeks = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().WEEK);
+          checkTime(_thisDoc.querySelector('.weeks'), weeks);
+        }
       }
     }
 
@@ -93,7 +100,7 @@ const flipCountdown = (WrappedComponent) => {
           { ...this.props }
           updateTime={ this.updateTime }>
           <div className="flipCountdown">
-              { this.props.weeks ? (
+              { this.props.weeks && this.props.days ? (
                 <div className="block-time weeks">
                   <span className="title">WEEKS</span>
                   <div className="stage tens">
@@ -111,21 +118,23 @@ const flipCountdown = (WrappedComponent) => {
                 </div>
               ) : null }
 
-              <div className="block-time days">
-                <span className="title">DAYS</span>
-                <div className="stage tens">
-                  <span className="top">7</span>
-                  <span className="top-back">7</span>
-                  <span className="bottom">7</span>
-                  <span className="bottom-back">7</span>
+              { this.props.days ? (
+                <div className="block-time days">
+                  <span className="title">DAYS</span>
+                  <div className="stage tens">
+                    <span className="top">7</span>
+                    <span className="top-back">7</span>
+                    <span className="bottom">7</span>
+                    <span className="bottom-back">7</span>
+                  </div>
+                  <div className="stage units">
+                    <span className="top">7</span>
+                    <span className="top-back">7</span>
+                    <span className="bottom">7</span>
+                    <span className="bottom-back">7</span>
+                  </div>
                 </div>
-                <div className="stage units">
-                  <span className="top">7</span>
-                  <span className="top-back">7</span>
-                  <span className="bottom">7</span>
-                  <span className="bottom-back">7</span>
-                </div>
-              </div>
+              ) : null }
 
               <div className="block-time hours">
                 <span className="title">HOURS</span>
@@ -183,10 +192,12 @@ const flipCountdown = (WrappedComponent) => {
   }
 
   FlipCountdown.propTypes = {
+    days: PropTypes.bool,
     weeks: PropTypes.bool
   };
 
   FlipCountdown.defaultProps = {
+    days: true,
     weeks: true
   };
 

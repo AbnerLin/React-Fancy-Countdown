@@ -23,7 +23,10 @@ const slideCountdown = (WrappedComponent) => {
         <WrappedComponent
           { ...this.props }
           updateTime={ this.updateTime }>
-          <div>Slide countdown.</div>
+          Flip countdown.
+          <div>
+
+          </div>
         </WrappedComponent>
       );
     }
