@@ -28,44 +28,88 @@ const slideCountdown = (WrappedComponent) => {
           <div className="slideCountdown">
             <div className="slide-block-time weeks">
               <div className="wrap-stage">
-                <div className="stage tens">8</div>
-                <div className="stage ones">7</div>
+                <div className="stage tens">
+                   <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
+                </div>
+                <div className="stage ones">
+                  <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
+                </div>
               </div>
-              <span className="title">WEEKS</span>
+              <div className="title">WEEKS</div>
             </div>
             <div className="slide-block-time days">
               <div className="wrap-stage">
-                <div className="stage tens">8</div>
-                <div className="stage ones">7</div>
+                <div className="stage tens">
+                   <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
+                </div>
+                <div className="stage ones">
+                  <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
+                </div>
               </div>
-              <span className="title">DAYS</span>
+              <div className="title">DAYS</div>
             </div>
             <div className="slide-block-time hours">
               <div className="wrap-stage">
-                <div className="stage tens">8</div>
-                <div className="stage ones">7</div>
+                <div className="stage tens">
+                   <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
+                </div>
+                <div className="stage ones">
+                  <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
+                </div>
               </div>
-              <span className="title">HOURS</span>
+              <div className="title">HOURS</div>
             </div>
             <div className="slide-block-time minutes">
               <div className="wrap-stage">
-                <div className="stage tens">8</div>
-                <div className="stage ones">7</div>
+                <div className="stage tens">
+                   <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
+                </div>
+                <div className="stage ones">
+                  <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
+                </div>
               </div>
-              <span className="title">MINUTES</span>
+              <div className="title">MINUTES</div>
             </div>
             <div className="slide-block-time seconds">
               <div className="wrap-stage">
                 <div className="stage tens">
-                  <span className="top">7</span>
-                  <span className="bottom">8</span>
+                   <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
                 </div>
                 <div className="stage ones">
-                  <span className="top">6</span>
-                  <span className="bottom">7</span>
+                  <div className="mask">
+                    <div className="top">2</div>
+                    <div className="bottom">6</div>
+                  </div>
                 </div>
               </div>
-              <span className="title">SECONDS</span>
+              <div className="title">SECONDS</div>
             </div>
           </div>
         </WrappedComponent>
