@@ -101,7 +101,7 @@ const flipCountdown = (WrappedComponent) => {
           updateTime={ this.updateTime }>
           <div className="flipCountdown">
               { this.props.weeks && this.props.days ? (
-                <div className="block-time weeks">
+                <div className="flip-block-time weeks">
                   <span className="title">WEEKS</span>
                   <div className="stage tens">
                     <span className="top">7</span>
@@ -119,7 +119,7 @@ const flipCountdown = (WrappedComponent) => {
               ) : null }
 
               { this.props.days ? (
-                <div className="block-time days">
+                <div className="flip-block-time days">
                   <span className="title">DAYS</span>
                   <div className="stage tens">
                     <span className="top">7</span>
@@ -136,7 +136,7 @@ const flipCountdown = (WrappedComponent) => {
                 </div>
               ) : null }
 
-              <div className="block-time hours">
+              <div className="flip-block-time hours">
                 <span className="title">HOURS</span>
                 <div className="stage tens">
                   <span className="top">7</span>
@@ -152,7 +152,7 @@ const flipCountdown = (WrappedComponent) => {
                 </div>
               </div>
 
-              <div className="block-time minutes">
+              <div className="flip-block-time minutes">
                 <span className="title">MINUTES</span>
                 <div className="stage tens">
                   <span className="top">7</span>
@@ -168,7 +168,7 @@ const flipCountdown = (WrappedComponent) => {
                 </div>
               </div>
 
-              <div className="block-time seconds">
+              <div className="flip-block-time seconds">
                 <span className="title">SECONDS</span>
                 <div className="stage tens">
                   <span className="top">7</span>
