@@ -38,6 +38,27 @@ class DateTimeUtil {
     }
   }
 
+  static getTimeObjs(flatSeconds, daysOpt, weeksOpt) {
+    let seconds = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().MINUTE);
+    let minutes = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().HOUR / DateTimeUtil.getSecondsDef().MINUTE);
+    let hours = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().DAY / DateTimeUtil.getSecondsDef().HOUR);
+    if (!daysOpt) {
+      hours = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().HOUR % 100);
+    }
+
+    let days = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().WEEK / DateTimeUtil.getSecondsDef().DAY);
+    let weeks = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().WEEK);
+    if (daysOpt) {
+      if (!weeksOpt) {
+        days = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().DAY % 100);
+      }
+    }
+
+    return {
+      seconds, minutes, hours, days, weeks
+    };
+  }
+
 }
 
 export default DateTimeUtil;

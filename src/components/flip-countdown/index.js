@@ -42,35 +42,24 @@ const flipCountdown = (WrappedComponent) => {
       }
 
       let _thisDoc = ReactDOM.findDOMNode(this);
+      let timeObjs = DateTimeUtil.getTimeObjs(flatSeconds, this.props.days, this.props.weeks);
 
       /** seconds */
-      let seconds = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().MINUTE);
-      checkTime(_thisDoc.querySelector('.seconds'), seconds);
+      checkTime(_thisDoc.querySelector('.seconds'), timeObjs.seconds);
 
       /** minutes */
-      let minutes = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().HOUR / DateTimeUtil.getSecondsDef().MINUTE);
-      checkTime(_thisDoc.querySelector('.minutes'), minutes);
-
+      checkTime(_thisDoc.querySelector('.minutes'), timeObjs.minutes);
 
       /** hours */
-      let hours = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().DAY / DateTimeUtil.getSecondsDef().HOUR);
-      if (!this.props.days) {
-        hours = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().HOUR % 100);
-      }
-      checkTime(_thisDoc.querySelector('.hours'), hours);
+      checkTime(_thisDoc.querySelector('.hours'), timeObjs.hours);
 
       /** days */
       if (this.props.days) {
-        let days = parseInt(flatSeconds % DateTimeUtil.getSecondsDef().WEEK / DateTimeUtil.getSecondsDef().DAY);
-        if (!this.props.weeks) {
-          days = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().DAY % 100);
-        }
-        checkTime(_thisDoc.querySelector('.days'), days);
+        checkTime(_thisDoc.querySelector('.days'), timeObjs.days);
 
         /**  weeks */
         if (this.props.weeks) {
-          let weeks = parseInt(flatSeconds / DateTimeUtil.getSecondsDef().WEEK);
-          checkTime(_thisDoc.querySelector('.weeks'), weeks);
+          checkTime(_thisDoc.querySelector('.weeks'), timeObjs.weeks);
         }
       }
     }

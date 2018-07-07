@@ -1,8 +1,26 @@
 
 class Effect {
 
-  static rotateX() {
+  static doAnimation(element, from, to, period, action, callback) {
+    var direct = from > to ? -1 : 1;
+    var value = from;
+    var interval = setInterval(animation, 3);
 
+    function animation() {
+      if (Math.abs(value - from) >= Math.abs(from - to)) {
+        clearInterval(interval);
+        if (callback)
+          callback();
+      } else {
+        value += Math.abs(from - to) / period * 3;
+
+        if ((direct < 0 && value < to) || (direct > 0 && value > to)) {
+          value = to * direct;
+        }
+
+        action(element, value * direct);
+      }
+    }
   }
 
   static resetRotateX(element) {
@@ -14,24 +32,20 @@ class Effect {
   }
 
   static rotateX(element, from, to, period, callback) {
-    var oriDeg = from;
+    Effect.doAnimation(element, from, to, period, (element, value) => {
+      Effect.setRotateX(element, value);
+    }, callback);
 
-    var interval = setInterval(animation, 3);
+  }
 
-    function animation() {
-      if (oriDeg >= to) {
-        clearInterval(interval);
-        if (callback)
-          callback();
-      } else {
-        oriDeg += Math.abs(from - to) / period * 3;
+  static setPositionB(element, bottomValue) {
+    element.style.bottom = bottomValue + 'px';
+  }
 
-        if(oriDeg > to)
-          oriDeg = to;
-
-        Effect.setRotateX(element, oriDeg);
-      }
-    }
+  static slideDown(element, from, to, period, callback) {
+    Effect.doAnimation(element, from, to, period, (element, value) => {
+      Effect.setPositionB(element, value);
+    }, callback);
   }
 }
 
