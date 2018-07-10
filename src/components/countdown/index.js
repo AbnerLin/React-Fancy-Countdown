@@ -27,6 +27,20 @@ class Countdown extends React.Component {
   componentDidMount() {
     this.update();
     this.start();
+
+    /** pause timer when tab inactive. */
+    document.addEventListener("visibilitychange", () => {
+      switch(document.visibilityState) {
+        case 'hidden':
+          // this.pause();
+          this.pause = true;
+          break;
+        case 'visible':
+          // this.start();
+          this.pause = false;
+          break;
+      }
+    });
   }
 
   start() {
@@ -36,12 +50,14 @@ class Countdown extends React.Component {
   }
 
   update() {
-    let secondsInterval = this.state.deadline ? DateTimeUtil.getInterval(DateTimeUtil.now(), this.state.deadline) : undefined;
+    if (!this.pause) {
+      let secondsInterval = this.state.deadline ? DateTimeUtil.getInterval(DateTimeUtil.now(), this.state.deadline) : undefined;
 
-    if (secondsInterval <= 0) {
-      this.stop();
-    } else {
-      this.props.updateTime(secondsInterval);
+      if (secondsInterval <= 0) {
+        this.stop();
+      } else {
+        this.props.updateTime(secondsInterval);
+      }
     }
   }
 
