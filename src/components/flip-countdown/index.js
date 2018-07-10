@@ -74,7 +74,7 @@ const flipCountdown = (WrappedComponent) => {
       bottom.innerHTML = value;
 
       Effect.rotateX(top, 0, 90, 150, () => {
-        Effect.rotateX(bottom, -90, 0, 100, () => {
+        Effect.rotateX(bottom, -90, 0, 80, () => {
           top.innerHTML = value;
           bottomBack.innerHTML = value;
           Effect.setRotateX(top, 0);
