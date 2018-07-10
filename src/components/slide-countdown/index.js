@@ -116,7 +116,7 @@ const slideCountdown = (WrappedComponent) => {
 
       top.innerHTML = value;
 
-      Effect.slideDown(mask, 0, -45, 650, () => {
+      Effect.slideDown(mask, 0, -45, 450, () => {
         bottom.innerHTML = value;
         Effect.setPositionB(mask, 0);
       });
