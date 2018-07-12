@@ -1,5 +1,7 @@
 .flipCountdown {
   display: inline-block;
+  line-height: 1.1 !important;
+  font-family: sans-serif !important;
 }
 
 .flip-block-time {
@@ -17,7 +19,6 @@
 
   >.stage {
     position: relative;
-    /*z-index: 5;*/
     float: left;
     width: 100px;
     height: 110px;

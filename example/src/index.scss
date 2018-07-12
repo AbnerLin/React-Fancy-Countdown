@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+  /*font-family: sans-serif;*/
+}
+
+header {
+  background-color: #FFC300;
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+
+  >.sub-title {
+    margin-top: 20px;
+    font-size: 25px;
+    display: inline-block;
+    color: #E5E7E9;
+    padding: 0 20px 0 20px;
+  }
+}
+
+.due {
+  font-size: 22px;
+  color: red;
+}
+
+.text-center {
+  text-align: center;
+}
+
