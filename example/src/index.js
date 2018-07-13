@@ -1,15 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button, Jumbotron } from 'reactstrap';
+import Highlight from 'react-highlight';
 import { BasicCountdown,
          FlipCountdown,
          SlideCountdown
        } from '../../src'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'highlight.js/styles/gruvbox-light.css';
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.tmp = 'fff';
+  }
 
   render() {
     return (
@@ -26,15 +34,56 @@ class App extends React.Component {
           Fancy Countdown
           <br />
           <div className="sub-title">
-            <p className="text-left">
-            A Fancy Countdown Component for ReactJS
-            <br />
-            Hope you'll like it.
-            </p>
+            <p className="text-left">A Fancy Countdown Component for ReactJS.<br />Hope you'll like it.</p>
           </div>
         </header>
 
         <Container>
+
+          <Row>
+            <Col className="title m-3"><h2>Basic countdown</h2></Col>
+          </Row>
+
+          <Row>
+            <Col md="6">
+              <Highlight>
+                {`
+    <BasicCountdown
+        deadline="2019-06-29 22:33:20"
+        interval={1000}
+        format="Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]" />
+                `}
+              </Highlight>
+            </Col>
+            <Col md="6" className="text-center my-auto basic-countdown-sample">
+              <BasicCountdown
+                deadline="2020-06-29 22:33:20"
+                interval={1000}
+                format="Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]" />
+            </Col>
+          </Row>
+
+          <hr />
+
+          <Row>
+            <Col md="6" className="text-center my-auto basic-countdown-sample">
+              <BasicCountdown
+                deadline="2020-06-29 22:33:20"
+                interval={1000}
+                format="Y[年] M[月] W[週] D[日] HH[時] mm[分] ss[秒]" />
+            </Col>
+             <Col md="6">
+              <Highlight className="my-auto">
+                {`
+    <BasicCountdown
+        deadline="2019-06-29 22:33:20"
+        interval={1000}
+        format="Y[年] M[月] W[週] D[日] HH[時] mm[分] ss[秒]" />
+                `}
+              </Highlight>
+            </Col>
+          </Row>
+
           <div>
             <div className="text-center">
               <BasicCountdown

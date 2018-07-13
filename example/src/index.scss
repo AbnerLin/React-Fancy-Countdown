@@ -9,14 +9,40 @@ header {
   color: white;
   font-size: 50px;
   font-weight: bold;
+  margin-bottom: 15px;
+  -webkit-box-shadow: -1px 6px 29px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 6px 29px -1px rgba(0,0,0,0.75);
+  box-shadow: -1px 6px 29px -1px rgba(0,0,0,0.75);
 
   >.sub-title {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 25px;
     display: inline-block;
-    color: #E5E7E9;
+    font-weight: normal;
     padding: 0 20px 0 20px;
   }
+}
+
+.title {
+  color: grey;
+}
+
+pre {
+  vertical-align: middle;
+}
+/*.block {
+  width: 100%;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 1px solid grey;
+  padding: 5px;
+}*/
+
+
+/** sample */
+.basic-countdown-sample {
+  font-size: 30px;
 }
 
 .due {

@@ -15,7 +15,6 @@ const basicCountdown = (WrappedComponent) => {
       hours: H or h
       minutes: m
       seconds: s
-      ms: S
       Escape token characters within the template string using square brackets.
       ================
     */
