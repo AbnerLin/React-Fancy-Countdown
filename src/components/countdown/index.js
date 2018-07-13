@@ -32,11 +32,9 @@ class Countdown extends React.Component {
     document.addEventListener("visibilitychange", () => {
       switch(document.visibilityState) {
         case 'hidden':
-          // this.pause();
           this.pause = true;
           break;
         case 'visible':
-          // this.start();
           this.pause = false;
           break;
       }

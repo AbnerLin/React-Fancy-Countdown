@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import { Container, Row, Col, Button, Jumbotron } from 'reactstrap';
+import { Container, Row, Col, Table } from 'reactstrap';
 import Highlight from 'react-highlight';
+import moment from 'moment';
 import { BasicCountdown,
          FlipCountdown,
          SlideCountdown
@@ -16,10 +17,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.tmp = 'fff';
+  }
+
+  componentWillMount() {
+    this.yearLater = moment().add(1, 'years').format('YYYY-MM-DD HH:mm:ss');
+    this.randomDate = moment().add(11765, 'hours').format('YYYY-MM-DD HH:mm:ss');
+    this.tenSecondsLater = moment().add(10, 'seconds').format('YYYY-MM-DD HH:mm:ss');
   }
 
   render() {
+    const Due = () => ( <div className="due">Game over =)</div> );
+
     return (
       <div>
 
@@ -39,51 +47,141 @@ class App extends React.Component {
         </header>
 
         <Container>
-
           <Row>
-            <Col className="title m-3"><h2>Basic countdown</h2></Col>
+            <Col className="title m-3"><h2>#Basic countdown</h2></Col>
           </Row>
 
           <Row>
-            <Col md="6">
+            <Col md="7">
               <Highlight>
                 {`
-    <BasicCountdown
-        deadline="2019-06-29 22:33:20"
-        interval={1000}
-        format="Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]" />
+  <BasicCountdown
+      deadline="` + this.randomDate + `"
+      interval={1000}
+      format="Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]" />
                 `}
               </Highlight>
             </Col>
-            <Col md="6" className="text-center my-auto basic-countdown-sample">
+            <Col md="5" className="text-center my-auto basic-countdown-sample">
               <BasicCountdown
-                deadline="2020-06-29 22:33:20"
+                deadline={ this.randomDate }
                 interval={1000}
                 format="Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]" />
             </Col>
           </Row>
 
-          <hr />
-
-          <Row>
-            <Col md="6" className="text-center my-auto basic-countdown-sample">
-              <BasicCountdown
-                deadline="2020-06-29 22:33:20"
-                interval={1000}
-                format="Y[年] M[月] W[週] D[日] HH[時] mm[分] ss[秒]" />
-            </Col>
-             <Col md="6">
+          <Row className="d-flex flex-md-row-reverse mt-md-3 mt-5">
+            <Col md="7">
               <Highlight className="my-auto">
                 {`
-    <BasicCountdown
-        deadline="2019-06-29 22:33:20"
-        interval={1000}
-        format="Y[年] M[月] W[週] D[日] HH[時] mm[分] ss[秒]" />
+  <BasicCountdown
+      deadline="` + this.yearLater + `"
+      interval={1000}
+      format="Y[年] M[月] W[週] D[日] HH[時] mm[分] ss[秒]" />
                 `}
               </Highlight>
             </Col>
+            <Col md="5" className="text-center my-auto basic-countdown-sample">
+              <BasicCountdown
+                deadline={ this.yearLater }
+                interval={1000}
+                format="Y[年] M[月] W[週] D[日] HH[時] mm[分] ss[秒]" />
+            </Col>
           </Row>
 
+          <Row className="mt-md-3 mt-5">
+            <Col md="7">
+              <Highlight className="my-auto">
+                {`
+  const Due = () => ( <div className="due">Game over!</div> );
+
+  <BasicCountdown
+      deadline="` + this.tenSecondsLater + `"
+      interval={1000}
+      format="ss[secs]"
+      callback={ () => {
+        console.log("Time is up..... !");
+      }}
+      dueElement={ <Due /> } />
+                `}
+              </Highlight>
+            </Col>
+            <Col md="5" className="text-center my-auto basic-countdown-sample">
+              <BasicCountdown
+                deadline={ this.tenSecondsLater }
+                interval={1000}
+                format="ss [secs]"
+                callback={ () => {
+                  console.log("Time is up..... !");
+                }}
+                dueElement={ <Due /> } />
+            </Col>
+          </Row>
+
+          <Row className="mt-md-3 mt-5">
+            <h4> Basic countdown Props </h4>
+            <Table bordered>
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>deadline</td>
+                  <td>String</td>
+                  <td>Deadline, format must be "YYYY-MM-DD HH:mm:ss".</td>
+                </tr>
+                <tr>
+                  <td>interval</td>
+                  <td>Number</td>
+                  <td>The interval(ms) for updating component.</td>
+                </tr>
+                <tr>
+                  <td>format</td>
+                  <td>String</td>
+                  <td>
+                      years  : Y or y      <br />
+                      months : M or MM    <br />
+                      weeks  : W or WW     <br />
+                      days   : D or DD      <br />
+                      hours  : H or HH     <br />
+                      minutes: mm        <br />
+                      seconds: ss        <br />
+                      Escape token characters within the template string using square brackets. <br />
+                      Example =>  Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]
+                  </td>
+                </tr>
+                <tr>
+                  <td>callback</td>
+                  <td>Function</td>
+                  <td>The function will invoked when the time is up.  <br />
+                  Default is console.log('Time is up.');</td>
+                </tr>
+                <tr>
+                  <td>dueElement</td>
+                  <td>Element</td>
+                  <td>The Element will show up to replace the countdown component when the time is up. <br />
+                   Default is &lt;div&gt; Time is up. &lt;/div&gt;</td>
+                </tr>
+              </tbody>
+            </Table>
+          </Row>
+
+          <hr />
+
+          <Row>
+            <Col className="title m-3"><h2>#Flip countdown</h2></Col>
+          </Row>
+
+          <Row>
+
+          </Row>
+
+
+          <hr /><hr /><hr /><hr /><hr /><hr />
           <div>
             <div className="text-center">
               <BasicCountdown

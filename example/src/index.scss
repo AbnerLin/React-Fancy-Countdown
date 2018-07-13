@@ -30,15 +30,6 @@ header {
 pre {
   vertical-align: middle;
 }
-/*.block {
-  width: 100%;
-  border-radius: 10px 10px 10px 10px;
-  -moz-border-radius: 10px 10px 10px 10px;
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border: 1px solid grey;
-  padding: 5px;
-}*/
-
 
 /** sample */
 .basic-countdown-sample {
@@ -46,8 +37,9 @@ pre {
 }
 
 .due {
-  font-size: 22px;
+  font-size: 30px;
   color: red;
+  font-weight: bold;
 }
 
 .text-center {
