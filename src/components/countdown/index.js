@@ -44,7 +44,7 @@ class Countdown extends React.Component {
   start() {
     this.timer = setInterval(() => {
       this.update();
-    }, this.props.interval || 1000);
+    }, this.props.interval);
   }
 
   update() {
@@ -70,7 +70,7 @@ class Countdown extends React.Component {
 
 	render() {
 		return (
-      <div>
+      <div className={this.props.className} id={this.props.id}>
         { this.state.due ? this.props.dueElement : this.props.children }
       </div>
     );
@@ -90,7 +90,8 @@ Countdown.defaultProps = {
   dueElement: (<div> Time is up. </div>),
   callback: () => {
     console.log('Time is up.');
-  }
+  },
+  interval: 1000
 };
 
 export default Countdown;

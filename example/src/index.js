@@ -23,10 +23,13 @@ class App extends React.Component {
     this.yearLater = moment().add(1, 'years').format('YYYY-MM-DD HH:mm:ss');
     this.randomDate = moment().add(11765, 'hours').format('YYYY-MM-DD HH:mm:ss');
     this.tenSecondsLater = moment().add(10, 'seconds').format('YYYY-MM-DD HH:mm:ss');
+    this.tenDaysLater = moment().add(10, 'days').format('YYYY-MM-DD HH:mm:ss');
+    this.tenHoursLater = moment().add(10, 'hours').format('YYYY-MM-DD HH:mm:ss');
   }
 
   render() {
     const Due = () => ( <div className="due">Game over =)</div> );
+    const Due2 = () => ( <div className="due">Time is up !!!! =)</div> );
 
     return (
       <div>
@@ -57,7 +60,6 @@ class App extends React.Component {
                 {`
   <BasicCountdown
       deadline="` + this.randomDate + `"
-      interval={1000}
       format="Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]" />
                 `}
               </Highlight>
@@ -65,7 +67,6 @@ class App extends React.Component {
             <Col md="5" className="text-center my-auto basic-countdown-sample">
               <BasicCountdown
                 deadline={ this.randomDate }
-                interval={1000}
                 format="Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]" />
             </Col>
           </Row>
@@ -76,7 +77,6 @@ class App extends React.Component {
                 {`
   <BasicCountdown
       deadline="` + this.yearLater + `"
-      interval={1000}
       format="Y[年] M[月] W[週] D[日] HH[時] mm[分] ss[秒]" />
                 `}
               </Highlight>
@@ -84,7 +84,6 @@ class App extends React.Component {
             <Col md="5" className="text-center my-auto basic-countdown-sample">
               <BasicCountdown
                 deadline={ this.yearLater }
-                interval={1000}
                 format="Y[年] M[月] W[週] D[日] HH[時] mm[分] ss[秒]" />
             </Col>
           </Row>
@@ -93,12 +92,17 @@ class App extends React.Component {
             <Col md="7">
               <Highlight className="my-auto">
                 {`
-  const Due = () => ( <div className="due">Game over!</div> );
+  .due {
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+  }
+
+  const Due = () => ( <div className="due">Game over =)</div> );
 
   <BasicCountdown
       deadline="` + this.tenSecondsLater + `"
-      interval={1000}
-      format="ss[secs]"
+      format="ss [secs]"
       callback={ () => {
         console.log("Time is up..... !");
       }}
@@ -109,7 +113,6 @@ class App extends React.Component {
             <Col md="5" className="text-center my-auto basic-countdown-sample">
               <BasicCountdown
                 deadline={ this.tenSecondsLater }
-                interval={1000}
                 format="ss [secs]"
                 callback={ () => {
                   console.log("Time is up..... !");
@@ -118,8 +121,10 @@ class App extends React.Component {
             </Col>
           </Row>
 
-          <Row className="mt-md-3 mt-5">
+          <Row className="mx-3 mt-3">
             <h4> Basic countdown Props </h4>
+          </Row>
+          <Row className="mt-md-3 mt-5">
             <Table bordered>
               <thead>
                 <tr>
@@ -130,6 +135,16 @@ class App extends React.Component {
               </thead>
               <tbody>
                 <tr>
+                  <td>id</td>
+                  <td>String</td>
+                  <td>DOM Id.</td>
+                </tr>
+                <tr>
+                  <td>className</td>
+                  <td>String</td>
+                  <td>DOM class.</td>
+                </tr>
+                <tr>
                   <td>deadline</td>
                   <td>String</td>
                   <td>Deadline, format must be "YYYY-MM-DD HH:mm:ss".</td>
@@ -137,7 +152,7 @@ class App extends React.Component {
                 <tr>
                   <td>interval</td>
                   <td>Number</td>
-                  <td>The interval(ms) for updating component.</td>
+                  <td>The interval(ms) for updating component.<br /> Deafult is 1000ms.</td>
                 </tr>
                 <tr>
                   <td>format</td>
@@ -177,43 +192,171 @@ class App extends React.Component {
           </Row>
 
           <Row>
+            <Col>
+              <FlipCountdown
+                deadline={ this.tenDaysLater } />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="px-5">
+              <Highlight>
+                {`
+  <FlipCountdown
+      deadline={`+ this.tenDaysLater + `} />
+                `}
+              </Highlight>
+            </Col>
+          </Row>
 
+          <hr />
+
+          <Row>
+            <Col className="text-center">
+              <FlipCountdown
+                deadline={ this.tenDaysLater }
+                weeks={false} />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="px-5">
+              <Highlight>
+                {`
+  <FlipCountdown
+      deadline={`+ this.tenDaysLater + `}
+      weeks={false} />
+                `}
+              </Highlight>
+            </Col>
+          </Row>
+
+          <hr />
+
+          <Row>
+            <Col className="text-center">
+              <FlipCountdown
+                deadline={ this.tenHoursLater }
+                days={false} />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="px-5">
+              <Highlight>
+                {`
+  <FlipCountdown
+      deadline={`+ this.tenHoursLater + `}
+      days={false} />
+                `}
+              </Highlight>
+            </Col>
+          </Row>
+
+          <hr />
+
+          <Row>
+            <Col className="text-center">
+              <FlipCountdown
+                deadline={ this.tenSecondsLater }
+                days={false}
+                callback={ () => {
+                  console.log('Flip countdown time is up.');
+                }}
+                dueElement={ <Due2 /> }/>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="px-5">
+              <Highlight>
+                {`
+  .due {
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+  }
+
+  const Due2 = () => ( <div className="due">Time is up !!!! =)</div> );
+
+  <FlipCountdown
+      deadline={`+ this.tenSecondsLater + `}
+      days={false}
+      callback={ () => {
+        console.log('Flip countdown time is up.');
+      }}
+      dueElement={ <Due2 /> }/>
+                `}
+              </Highlight>
+            </Col>
+          </Row>
+
+          <Row className="mx-3 mt-3">
+            <h4> Flip countdown Props </h4>
+          </Row>
+          <Row className="mt-md-3 mt-5">
+            <Table bordered>
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>String</td>
+                  <td>DOM Id.</td>
+                </tr>
+                <tr>
+                  <td>className</td>
+                  <td>String</td>
+                  <td>DOM class.</td>
+                </tr>
+                <tr>
+                  <td>weeks</td>
+                  <td>Boolean</td>
+                  <td>Whether to show the unit "weeks". If "days" set to false, "weeks" will always be false.</td>
+                </tr>
+                <tr>
+                  <td>days</td>
+                  <td>Boolean</td>
+                  <td>Whether to show the unit "days".</td>
+                </tr>
+                <tr>
+                  <td>deadline</td>
+                  <td>String</td>
+                  <td>Deadline, format must be "YYYY-MM-DD HH:mm:ss".</td>
+                </tr>
+                <tr>
+                  <td>interval</td>
+                  <td>Number</td>
+                  <td>The interval(ms) for updating component.<br /> Deafult is 1000ms.</td>
+                </tr>
+                <tr>
+                  <td>callback</td>
+                  <td>Function</td>
+                  <td>The function will invoked when the time is up.  <br />
+                  Default is console.log('Time is up.');</td>
+                </tr>
+                <tr>
+                  <td>dueElement</td>
+                  <td>Element</td>
+                  <td>The Element will show up to replace the countdown component when the time is up. <br />
+                   Default is &lt;div&gt; Time is up. &lt;/div&gt;</td>
+                </tr>
+              </tbody>
+            </Table>
           </Row>
 
 
+
+
+
+
+          <Row>
+            <Col>
+              The animation will pause when the tab inactive.
+            </Col>
+          </Row>
           <hr /><hr /><hr /><hr /><hr /><hr />
-          <div>
-            <div className="text-center">
-              <BasicCountdown
-                deadline="2018-06-25 13:00:00"
-                interval={1000}
-                format="Y[year(s)] M[months] D[days] HH:mm:ss"
-                callback={ () => {
-                  console.log("時間到......");
-                }}
-                dueElement={ <Due /> } />
-            </div>
-
-            <hr />
-
-            <div className="text-center">
-              <BasicCountdown
-                deadline="2019-06-29 22:33:20"
-                interval={1000}
-                format="Y[年] M[月] D[天] HH[時]mm[分]ss[秒]" />
-            </div>
-
-            <hr />
-
-            <div className="text-center">
-              <BasicCountdown
-                deadline="2019-06-30 12:39:11"
-                interval={3000}
-                format="Y[年] M[月] D[天] HH[時]mm[分]ss[秒]" />
-              </div>
-          </div>
-
-          <hr />
 
           <div>
 
