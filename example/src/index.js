@@ -40,6 +40,7 @@ class App extends React.Component {
   render() {
     const Due = () => ( <div className="due">Game over =)</div> );
     const Due2 = () => ( <div className="due">Time is up !!!! =)</div> );
+    const Due3 = () => ( <div className="due">Time is up, Hope you'll like this component !!!! =)</div> );
 
     return (
       <div>
@@ -327,12 +328,12 @@ class App extends React.Component {
                 <tr>
                   <td>weeks</td>
                   <td>Boolean</td>
-                  <td>Whether to show the unit "weeks". If "days" set to false, "weeks" will always be false.</td>
+                  <td>Whether to show the unit "weeks". If "days" set to false, "weeks" will always be false. <br />If "weeks" is false, please make sure the deadline won't over than 99 days!</td>
                 </tr>
                 <tr>
                   <td>days</td>
                   <td>Boolean</td>
-                  <td>Whether to show the unit "days".</td>
+                  <td>Whether to show the unit "days". <br />If "days" is false, plsease make sure the deadline won't over than 99 hours!</td>
                 </tr>
                 <tr>
                   <td>deadline</td>
@@ -360,105 +361,154 @@ class App extends React.Component {
             </Table>
           </Row>
 
-
-
-
-
+           <hr />
 
           <Row>
-            <Col>
-              The animation will pause when the tab inactive.
+            <Col className="title m-3"><h2>#Slide countdown</h2></Col>
+          </Row>
+
+          <Row  className="d-flex flex-md-row-reverse">
+            <Col md="5">
+              <Highlight>
+                {`
+  <SlideCountdown
+      deadline={` + this.randomDate + `} />
+                `}
+              </Highlight>
+            </Col>
+            <Col md="7" className="text-center my-auto">
+              <SlideCountdown
+                deadline={ this.randomDate } />
             </Col>
           </Row>
-          <hr /><hr /><hr /><hr /><hr /><hr />
 
-          <div>
+          <hr />
 
-            <div className="text-center">
-              <FlipCountdown
-                deadline="2018-07-30 22:38:20"
-                interval={1000}
-                weeks={false} />
-            </div>
+          <Row>
+            <Col md="5">
+              <Highlight>
+                {`
+  <SlideCountdown
+      weeks={false}
+      deadline={` + this.tenDaysLater + `} />
+                `}
+              </Highlight>
+            </Col>
+            <Col md="7" className="text-center my-auto">
+              <SlideCountdown
+                weeks={false}
+                deadline={ this.tenDaysLater } />
+            </Col>
+          </Row>
 
-            <hr />
+          <hr />
 
-            <div className="text-center">
-              <FlipCountdown
-                deadline="2018-07-30 01:21:00"
-                interval={1000} />
-            </div>
+          <Row  className="d-flex flex-md-row-reverse">
+            <Col md="8">
+              <Highlight>
+                {`
+      .due {
+        font-size: 30px;
+        color: red;
+        font-weight: bold;
+      }
 
-            <div className="text-center">
-              <FlipCountdown
-                deadline="2018-07-09 01:23:00"
+      const Due3 = () => (
+          <div className="due">
+            Time is up, Hope you'll like this component !!!! =)
+          </div>
+      );
+
+      <SlideCountdown
+          deadline={`+ this.state.tenSecondsLater + `}
+          days={false}
+          callback={ () => {
+            console.log('Flip countdown time is up.');
+          }}
+          dueElement={ <Due3 /> }/>
+                `}
+              </Highlight>
+            </Col>
+            <Col md="4" className="text-center my-auto">
+              <SlideCountdown
+                deadline={ this.state.tenSecondsLater }
                 days={false}
-                weeks={false}
-                interval={1000} />
-            </div>
-          </div>
+                callback={ () => {
+                  console.log('Slide countdown time is up.');
+                }}
+                dueElement={ <Due3 /> }/>
+              <Button color="primary" className="my-3"
+                  onClick={this.resetTimer} >Reset</Button>
+            </Col>
+          </Row>
 
-          <hr />
+          <Row className="mx-3 mt-3">
+            <h4> Slide countdown Props </h4>
+          </Row>
+          <Row className="mt-md-3 mt-5">
+            <Table bordered>
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>String</td>
+                  <td>DOM Id.</td>
+                </tr>
+                <tr>
+                  <td>className</td>
+                  <td>String</td>
+                  <td>DOM class.</td>
+                </tr>
+                <tr>
+                  <td>weeks</td>
+                  <td>Boolean</td>
+                  <td>Whether to show the unit "weeks". If "days" set to false, "weeks" will always be false. <br />If "weeks" is false, please make sure the deadline won't over than 99 days!</td>
+                </tr>
+                <tr>
+                  <td>days</td>
+                  <td>Boolean</td>
+                  <td>Whether to show the unit "days". <br />If "days" is false, plsease make sure the deadline won't over than 99 hours!</td>
+                </tr>
+                <tr>
+                  <td>deadline</td>
+                  <td>String</td>
+                  <td>Deadline, format must be "YYYY-MM-DD HH:mm:ss".<br /> Recommend to store deadline in State, once deadline updated in State, the countdown will reset.</td>
+                </tr>
+                <tr>
+                  <td>interval</td>
+                  <td>Number</td>
+                  <td>The interval(ms) for updating component.<br /> Deafult is 1000ms.</td>
+                </tr>
+                <tr>
+                  <td>callback</td>
+                  <td>Function</td>
+                  <td>The function will invoked when the time is up.  <br />
+                  Default is console.log('Time is up.');</td>
+                </tr>
+                <tr>
+                  <td>dueElement</td>
+                  <td>Element</td>
+                  <td>The Element will show up to replace the countdown component when the time is up. <br />
+                   Default is &lt;div&gt; Time is up. &lt;/div&gt;</td>
+                </tr>
+              </tbody>
+            </Table>
+          </Row>
 
-          <div>
-            <div className="text-center">
-              <SlideCountdown
-                deadline="2019-06-30 12:39:11"
-                interval={1000} />
-            </div>
-          </div>
-
-          <hr />
-
-          <div>
-            <div className="text-center">
-              <SlideCountdown
-                deadline="2018-07-08 12:39:11"
-                days={true}
-                weeks={false}
-                interval={1000} />
-            </div>
-          </div>
-
-          <hr />
-
-          <div>
-            <div className="text-center">
-              <SlideCountdown
-                deadline="2018-07-08 12:39:11"
-                days={false}
-                weeks={false}
-                interval={3000} />
-            </div>
-          </div>
-
-
+          <footer className="mt-md-5 text-center">
+            Copyright © <a href="https://www.linkedin.com/in/shaoyang-lin/">AbnerLin</a> { moment().get('year') }. MIT Licensed.
+          </footer>
         </Container>
+
       </div>
     );
   }
 }
-
-
-const Due = () => ( <div className="due">Game over!</div> );
-
-const App1 = () => (
-  <Container>
-
-    <header>
-      Header.
-    </header>
-
-    <Row>
-      <Col sm="6">aa</Col>
-      <Col sm="6">aa</Col>
-    </Row>
-
-    <Button color="danger">Danger!</Button>
-
-
-
-  </Container>
-);
 
 ReactDOM.render(<App />, document.getElementById('root'));

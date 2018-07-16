@@ -12,7 +12,7 @@ const slideCountdown = (WrappedComponent) => {
 
     /**
       =====Props=====
-      Days: Set true if hours are more than 99; If false this component only support less than 100 hours and doesn't show Hours and Weeks.
+      Days: Set true if hours are more than 99; If false this component only support less than 100 hours and doesn't show Days and Weeks.
       Weeks: Set true if days are more than 99; If false this component only support less than 100 days and doesn't show Weeks.
       ================
     */
