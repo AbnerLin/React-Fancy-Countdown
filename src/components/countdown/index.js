@@ -41,6 +41,19 @@ class Countdown extends React.Component {
     });
   }
 
+  componentWillUpdate(nextProps) {
+    if (this.props.deadline != nextProps.deadline) {
+      clearInterval(this.timer);
+      this.setState({
+        deadline: nextProps.deadline,
+        due: false
+      }, () => {
+        this.update();
+        this.start();
+      });
+    }
+  }
+
   start() {
     this.timer = setInterval(() => {
       this.update();

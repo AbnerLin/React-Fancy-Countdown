@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import { Container, Row, Col, Table } from 'reactstrap';
+import { Container, Row, Col, Table, Button } from 'reactstrap';
 import Highlight from 'react-highlight';
 import moment from 'moment';
 import { BasicCountdown,
@@ -17,12 +17,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      tenSecondsLater: moment().add(9, 'seconds').format('YYYY-MM-DD HH:mm:ss')
+    };
+
+    this.resetTimer = this.resetTimer.bind(this);
+  }
+
+  resetTimer() {
+    this.setState({
+      tenSecondsLater: moment().add(9, 'seconds').format('YYYY-MM-DD HH:mm:ss')
+    });
   }
 
   componentWillMount() {
     this.yearLater = moment().add(1, 'years').format('YYYY-MM-DD HH:mm:ss');
     this.randomDate = moment().add(11765, 'hours').format('YYYY-MM-DD HH:mm:ss');
-    this.tenSecondsLater = moment().add(10, 'seconds').format('YYYY-MM-DD HH:mm:ss');
     this.tenDaysLater = moment().add(10, 'days').format('YYYY-MM-DD HH:mm:ss');
     this.tenHoursLater = moment().add(10, 'hours').format('YYYY-MM-DD HH:mm:ss');
   }
@@ -101,7 +111,7 @@ class App extends React.Component {
   const Due = () => ( <div className="due">Game over =)</div> );
 
   <BasicCountdown
-      deadline="` + this.tenSecondsLater + `"
+      deadline="` + this.state.tenSecondsLater + `"
       format="ss [secs]"
       callback={ () => {
         console.log("Time is up..... !");
@@ -112,12 +122,14 @@ class App extends React.Component {
             </Col>
             <Col md="5" className="text-center my-auto basic-countdown-sample">
               <BasicCountdown
-                deadline={ this.tenSecondsLater }
+                deadline={ this.state.tenSecondsLater }
                 format="ss [secs]"
                 callback={ () => {
                   console.log("Time is up..... !");
                 }}
                 dueElement={ <Due /> } />
+              <Button color="primary"
+                  onClick={this.resetTimer} >Reset</Button>
             </Col>
           </Row>
 
@@ -147,7 +159,7 @@ class App extends React.Component {
                 <tr>
                   <td>deadline</td>
                   <td>String</td>
-                  <td>Deadline, format must be "YYYY-MM-DD HH:mm:ss".</td>
+                  <td>Deadline, format must be "YYYY-MM-DD HH:mm:ss".<br /> Recommend to store deadline in State, once deadline updated in State, the countdown will reset.</td>
                 </tr>
                 <tr>
                   <td>interval</td>
@@ -255,12 +267,14 @@ class App extends React.Component {
           <Row>
             <Col className="text-center">
               <FlipCountdown
-                deadline={ this.tenSecondsLater }
+                deadline={ this.state.tenSecondsLater }
                 days={false}
                 callback={ () => {
                   console.log('Flip countdown time is up.');
                 }}
                 dueElement={ <Due2 /> }/>
+              <Button color="primary" className="my-3"
+                  onClick={this.resetTimer} >Reset</Button>
             </Col>
           </Row>
           <Row>
@@ -276,7 +290,7 @@ class App extends React.Component {
   const Due2 = () => ( <div className="due">Time is up !!!! =)</div> );
 
   <FlipCountdown
-      deadline={`+ this.tenSecondsLater + `}
+      deadline={`+ this.state.tenSecondsLater + `}
       days={false}
       callback={ () => {
         console.log('Flip countdown time is up.');
@@ -323,7 +337,7 @@ class App extends React.Component {
                 <tr>
                   <td>deadline</td>
                   <td>String</td>
-                  <td>Deadline, format must be "YYYY-MM-DD HH:mm:ss".</td>
+                  <td>Deadline, format must be "YYYY-MM-DD HH:mm:ss".<br /> Recommend to store deadline in State, once deadline updated in State, the countdown will reset.</td>
                 </tr>
                 <tr>
                   <td>interval</td>
