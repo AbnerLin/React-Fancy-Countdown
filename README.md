@@ -34,7 +34,7 @@ deadline|String|Deadline, format must be "YYYY-MM-DD HH:mm:ss".<br />Recommend t
 interval|Number|The interval(ms) for updating component.<br />Deafult is 1000ms.
 format|String|years : Y or y <br />months : M or MM <br />weeks : W or WW <br />days : D or DD <br />hours : H or HH <br />minutes: mm <br />seconds: ss <br />Escape token characters within the template string using square brackets. <br />Example => Y[y] M[m] W[w] D[d] HH[hrs] mm[mins] ss[secs]
 callback|Function|The function will invoked when the time is up. <br />Default is console.log('Time is up.');
-dueElement|Element|The Element will show up to replace the countdown component when the time is up. <br />Default is <div> Time is up. </div>
+dueElement|Element|The Element will show up to replace the countdown component when the time is up. <br />Default is &lt;div&gt; Time is up. &lt;/div&gt;
 
 ---
 
@@ -63,7 +63,7 @@ days|Boolean|Whether to show the unit "days". <br />If "days" is false, plsease 
 deadline|String|Deadline, format must be "YYYY-MM-DD HH:mm:ss".<br />Recommend to store deadline in State, once deadline updated in State, the countdown will reset.
 interval|Number|The interval(ms) for updating component.<br />Deafult is 1000ms.
 callback|Function|The function will invoked when the time is up. <br />Default is console.log('Time is up.');
-dueElement|Element|The Element will show up to replace the countdown component when the time is up. <br />Default is <div> Time is up. </div>
+dueElement|Element|The Element will show up to replace the countdown component when the time is up. <br />Default is &lt;div&gt; Time is up. &lt;/div&gt;
 
 ---
 
@@ -92,4 +92,4 @@ days|Boolean|Whether to show the unit "days". <br />If "days" is false, plsease 
 deadline|String|Deadline, format must be "YYYY-MM-DD HH:mm:ss".<br />Recommend to store deadline in State, once deadline updated in State, the countdown will reset.
 interval|Number|The interval(ms) for updating component.<br />Deafult is 1000ms.
 callback|Function|The function will invoked when the time is up. <br />Default is console.log('Time is up.');
-dueElement|Element|The Element will show up to replace the countdown component when the time is up. <br />Default is <div> Time is up. </div>
+dueElement|Element|The Element will show up to replace the countdown component when the time is up. <br />Default is &lt;div&gt; Time is up. &lt;/div&gt;
