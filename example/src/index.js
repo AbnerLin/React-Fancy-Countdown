@@ -215,7 +215,7 @@ class App extends React.Component {
               <Highlight>
                 {`
   <FlipCountdown
-      deadline={`+ this.tenDaysLater + `} />
+      deadline="`+ this.tenDaysLater + `" />
                 `}
               </Highlight>
             </Col>
@@ -235,7 +235,7 @@ class App extends React.Component {
               <Highlight>
                 {`
   <FlipCountdown
-      deadline={`+ this.tenDaysLater + `}
+      deadline="`+ this.tenDaysLater + `"
       weeks={false} />
                 `}
               </Highlight>
@@ -256,7 +256,7 @@ class App extends React.Component {
               <Highlight>
                 {`
   <FlipCountdown
-      deadline={`+ this.tenHoursLater + `}
+      deadline="`+ this.tenHoursLater + `"
       days={false} />
                 `}
               </Highlight>
@@ -291,7 +291,7 @@ class App extends React.Component {
   const Due2 = () => ( <div className="due">Time is up !!!! =)</div> );
 
   <FlipCountdown
-      deadline={`+ this.state.tenSecondsLater + `}
+      deadline="`+ this.state.tenSecondsLater + `"
       days={false}
       callback={ () => {
         console.log('Flip countdown time is up.');
@@ -372,7 +372,7 @@ class App extends React.Component {
               <Highlight>
                 {`
   <SlideCountdown
-      deadline={` + this.randomDate + `} />
+      deadline="` + this.randomDate + `" />
                 `}
               </Highlight>
             </Col>
@@ -390,7 +390,7 @@ class App extends React.Component {
                 {`
   <SlideCountdown
       weeks={false}
-      deadline={` + this.tenDaysLater + `} />
+      deadline="` + this.tenDaysLater + `" />
                 `}
               </Highlight>
             </Col>
@@ -420,7 +420,7 @@ class App extends React.Component {
       );
 
       <SlideCountdown
-          deadline={`+ this.state.tenSecondsLater + `}
+          deadline="`+ this.state.tenSecondsLater + `"
           days={false}
           callback={ () => {
             console.log('Flip countdown time is up.');
