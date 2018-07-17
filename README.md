@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/react-fancy-countdown.svg)](https://badge.fury.io/js/react-fancy-countdown)
+
 # React-Fancy-Countdown
 A fancy countdown component for React.
 
