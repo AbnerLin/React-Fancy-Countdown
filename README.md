@@ -42,6 +42,7 @@ dueElement|Element|The Element will show up to replace the countdown component w
 This is basic usage, the more advanced usage please check [Demo](https://abnerlin.github.io/React-Fancy-Countdown/).
 ```
 import { FlipCountdown } from 'react-fancy-countdown';
+import 'react-fancy-countdown/dist/countdown.css';
  
 class App extends React.Component {
   ...
@@ -70,6 +71,7 @@ dueElement|Element|The Element will show up to replace the countdown component w
 This is basic usage, the more advanced usage please check [Demo](https://abnerlin.github.io/React-Fancy-Countdown/).
 ```
 import { SlideCountdown } from 'react-fancy-countdown';
+import 'react-fancy-countdown/dist/countdown.css';
 
 class App extends React.Component {
   ...
