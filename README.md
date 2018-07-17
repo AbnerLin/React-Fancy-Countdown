@@ -2,7 +2,7 @@
 A fancy countdown component for React.
 
 ## Demo
-Live demo: https://github.com/AbnerLin/React-Fancy-Countdown
+Live demo: https://abnerlin.github.io/React-Fancy-Countdown/
 
 ## Installation
 `
@@ -11,7 +11,7 @@ npm install --save react-fancy-countdown
 
 ## Usage 
 ### Basic Countdown 
-This is basic usage, the more advanced usage please check [Demo](https://github.com/AbnerLin/React-Fancy-Countdown).
+This is basic usage, the more advanced usage please check [Demo](https://abnerlin.github.io/React-Fancy-Countdown/).
 ```
 import { BasicCountdown } from 'react-fancy-countdown';
  
@@ -39,7 +39,7 @@ dueElement|Element|The Element will show up to replace the countdown component w
 ---
 
 ### Flip Countdown
-This is basic usage, the more advanced usage please check [Demo](https://github.com/AbnerLin/React-Fancy-Countdown).
+This is basic usage, the more advanced usage please check [Demo](https://abnerlin.github.io/React-Fancy-Countdown/).
 ```
 import { FlipCountdown } from 'react-fancy-countdown';
  
@@ -67,7 +67,7 @@ dueElement|Element|The Element will show up to replace the countdown component w
 ---
 
 ### Slide Countdown
-This is basic usage, the more advanced usage please check [Demo](https://github.com/AbnerLin/React-Fancy-Countdown).
+This is basic usage, the more advanced usage please check [Demo](https://abnerlin.github.io/React-Fancy-Countdown/).
 ```
 import { SlideCountdown } from 'react-fancy-countdown';
 
