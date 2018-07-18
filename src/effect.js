@@ -5,12 +5,10 @@ class Effect {
     var direct = from > to ? -1 : 1;
     var value = from;
 
-    // var interval = setInterval(animation, 3);
     var interval = null;
 
     function animation() {
       if (Math.abs(value - from) >= Math.abs(from - to)) {
-        // clearInterval(interval);
         cancelAnimationFrame(interval);
         if (callback)
           callback();
@@ -20,7 +18,6 @@ class Effect {
         if ((direct < 0 && value < to) || (direct > 0 && value > to)) {
           value = to * direct;
         }
-        // console.log(action, value * direct);
         action(element, value * direct);
 
         requestAnimationFrame(animation);
