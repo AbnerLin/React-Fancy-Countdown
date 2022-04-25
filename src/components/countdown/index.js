@@ -100,9 +100,9 @@ Countdown.propTypes = {
 };
 
 Countdown.defaultProps = {
-  dueElement: (<div> Time is up. </div>),
+  dueElement: (<div></div>),
   callback: () => {
-    console.log('Time is up.');
+    console.log('Timer Commpleted.');
   },
   interval: 1000
 };
